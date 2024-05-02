@@ -36,7 +36,6 @@ class GlobalReports: ObservableObject {
         "Social engineering", "Password theft", "Account hijacking", "Botnets", "Denial of Service (DoS)", "Distributed Denial of Service (DDoS)", "Spoofing",
         "Keylogging", "Ransomware", "Spyware", "Adware", "Browser hijacking", "Online harassment", "Trolling", "Flame wars", "Doxing",
     "Swatting", "Ghosting", "Catfishing", "Impersonation scams", "Romance scams", "Sex", "Dick", "Porn", "Kill", "Drug", "Foul", "Vile", "Evil", "Gore", "Lust"]
-//        "Pain", "Harm", "Fury", "Fist", "Rage", "Sick", "Vain", "Cult", "Dark", "Liar", "Rude", "Slam", "Crab", "Jerk", "Riot", "Lame", "Smut", "Rape", "Damn", "Doom", "Dice", "Wimp", "Vile", "Nazi", "Hell", "Crux", "Nuke", "Scum", "Wuss", "Dumb" ]
 
     init(reports: [Report] = []) {
         self.reports = reports
