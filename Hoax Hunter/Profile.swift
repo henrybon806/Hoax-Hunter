@@ -23,6 +23,7 @@ struct Profile: View {
     @State private var showAlert = false
     @State private var showAlert2 = false
     @State private var alertMessage = ""
+    @State private var deleteAccount = false
     @State private var newEmail = ""
     @State private var newPassword = ""
     @State private var isChangingEmail = false
@@ -293,20 +294,45 @@ struct Profile: View {
                 .padding(.top, -30)
                 .padding(.bottom, -35)
                 
-                Button(action: {
-                    UserDefaults.standard.set(false, forKey: "rememberLogin")
-                    UserDefaults.standard.set("", forKey: "storedEmail")
-                    UserDefaults.standard.set("", forKey: "storedPassword")
+                HStack{
+                    Button(action: {
+                        UserDefaults.standard.set(false, forKey: "rememberLogin")
+                        UserDefaults.standard.set("", forKey: "storedEmail")
+                        UserDefaults.standard.set("", forKey: "storedPassword")
+                        
+                        isLoggedOut = true
+                    }) {
+                        VStack{
+                            Text("Log Out")
+                                .padding()
+                                .padding(.horizontal, 25)
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                    }
                     
-                    isLoggedOut = true
-                }) {
-                    VStack{
-                        Text("Log Out")
-                            .padding()
-                            .padding(.horizontal, 75)
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
+                    Button(action: {
+                        deleteAccount = true
+                    }) {
+                        VStack{
+                            Text("Delete Account")
+                                .padding()
+                                .padding(.horizontal, 15)
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                    }
+                    .alert(isPresented: $deleteAccount) {
+                        Alert(
+                            title: Text("Delete Account"),
+                            message: Text("Are you sure you want to delete your account? This action cannot be undone. This will delete all of your stored data."),
+                            primaryButton: .destructive(Text("Delete")) {
+                                deleteUser()
+                            },
+                            secondaryButton: .cancel(Text("Cancel"))
+                        )
                     }
                 }
                 .padding()
@@ -342,6 +368,24 @@ struct Profile: View {
         displayName = firstNameInput
         displayName += " " + lastNameInput
     }
+    
+    func deleteUser() {
+            UserDefaults.standard.set(false, forKey: "rememberLogin")
+            UserDefaults.standard.set("", forKey: "storedEmail")
+            UserDefaults.standard.set("", forKey: "storedPassword")
+
+            let user = Auth.auth().currentUser
+
+            user?.delete { error in
+                if let error = error {
+                    print("Unable to delete user:", error.localizedDescription)
+                } else {
+                    print("Account deleted successfully")
+                }
+            }
+
+            isLoggedOut = true
+        }
     
     func loadImage() {
         let storage = Storage.storage()

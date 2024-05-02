@@ -90,6 +90,10 @@ class ReportManager: ObservableObject {
             }
         }
     }
+    
+    static func doesExist(articleID: String) -> Bool{
+        return ReportManager.shared.reports.contains { $0.articleID == articleID }
+    }
 }
 
 struct FirstPage: View {

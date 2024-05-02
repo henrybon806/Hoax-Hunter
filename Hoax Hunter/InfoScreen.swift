@@ -12,13 +12,15 @@ import UIKit
 
 struct InfoScreen: View {
     @Binding var report: Report
-    @Binding var showPost: Bool
-    @Binding var showUnSave: Bool
-    @State private var isAlertPresented = false
-    static var closePage = false
-    static var labeltbh = "Unsave"
-    static var check: Bool = false
-    @Environment(\.presentationMode) var presentationMode
+        @Binding var showPost: Bool
+        @Binding var showUnSave: Bool
+        @State private var isAlertPresented = false
+        @State private var showOptionsSheet = false
+        @State private var isContentFlagged = false
+        static var closePage = false
+        static var labeltbh = "Unsave"
+        static var check: Bool = false
+        @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack {
@@ -96,7 +98,7 @@ struct InfoScreen: View {
                     if(report.isPosted){
                         Alert(
                             title: Text("Article Posted"),
-                            message: Text("Article is now posted. Please be respectful when posting articles online."),
+                            message: Text("Article is now posted. Please be respectful when posting articles online and follow EULA."),
                             dismissButton: .default(Text("OK")) {
                                 report.isPosted = true
                                 GlobalReports.addSample(isFake: report.isFakeNews, articleName: report.articleID, articleContent: report.articleContent)
@@ -123,11 +125,24 @@ struct InfoScreen: View {
         .toolbar{
             ToolbarItem(placement: .navigationBarTrailing) {
                 if(!showUnSave){
-                    Button(action: {
-                        PersonalReports.addSample(isFake: report.isFakeNews, articleName: report.articleID, articleContent: report.articleContent)
-                        PersonalReports.shared.saveReports()
-                    }) {
-                        Image(systemName: "square.and.arrow.down")
+                    HStack{
+                        Button(action: {
+                            PersonalReports.addSample(isFake: report.isFakeNews, articleName: report.articleID, articleContent: report.articleContent)
+                            PersonalReports.shared.saveReports()
+                        }) {
+                            Image(systemName: "square.and.arrow.down")
+                        }
+                        
+                        if(!ReportManager.doesExist(articleID: report.articleID)){
+                            Button(action: {
+                                showOptionsSheet = true
+                            }) {
+                                Image(systemName: "ellipsis.circle")
+                            }
+                            .sheet(isPresented: $showOptionsSheet) {
+                                OptionsSheet(articleID: Binding<String>.constant(report.articleID))
+                            }
+                        }
                     }
                 }
                 else{

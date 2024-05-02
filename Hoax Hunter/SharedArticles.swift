@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
+import FirebaseAuth
 
 struct SharedArticlesView: View {
     @StateObject private var reportManager = GlobalReports.shared
     @State private var isSheetPresented = false
+    @State var isFiltered = false
 
     var body: some View {
             NavigationView{
@@ -21,6 +24,15 @@ struct SharedArticlesView: View {
                             .padding(.leading, 10)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
+                        Button(action: {
+                            reportManager.loadReports()
+                            fetchFilterStatus()
+                       }) {
+                           Image(systemName: "arrow.clockwise.circle.fill")
+                               .font(.title)
+                               .foregroundColor(.blue)
+                       }
+
                         Button(action: {
                             isSheetPresented.toggle()
                                    }) {
@@ -37,8 +49,10 @@ struct SharedArticlesView: View {
                     HStack{
                         List {
                             ForEach($reportManager.reports.indices, id: \.self) { index in
-                                NavigationLink(destination: InfoScreen(report: $reportManager.reports[index], showPost: Binding<Bool>.constant(false), showUnSave: Binding<Bool>.constant(false))) {
-                                    ReportItemView(report: $reportManager.reports[index])
+                                if(!reportManager.containsObjectionableKeywords(reportManager.reports[index].articleContent) ||  !isFiltered){
+                                    NavigationLink(destination: InfoScreen(report: $reportManager.reports[index], showPost: Binding<Bool>.constant(false), showUnSave: Binding<Bool>.constant(false))) {
+                                        ReportItemView(report: $reportManager.reports[index])
+                                    }
                                 }
                             }
                         }
@@ -61,9 +75,31 @@ struct SharedArticlesView: View {
                             }
                         )
                     }
-                    .padding([.leading, .trailing], 20) // Adjust the side padding as needed
+                    .padding([.leading, .trailing], 20)
                 }
             }
+            .onAppear(){
+                fetchFilterStatus()
+            }
+    }
+    
+    private func fetchFilterStatus() {
+        let db = Firestore.firestore()
+        
+        if let userID = Auth.auth().currentUser?.uid {
+            db.collection("user").document(userID).getDocument { document, error in
+                if let document = document, document.exists {
+                    if let isFlagged = document.data()?["isFiltered"] as? Bool {
+                        DispatchQueue.main.async {
+                            print(isFlagged)
+                            isFiltered = isFlagged
+                        }
+                    }
+                } else {
+                    print("Document does not exist")
+                }
+            }
+        }
     }
 }
 
