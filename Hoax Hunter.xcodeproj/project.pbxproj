@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8102BB382BE4A1EB00B5023B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8102BB372BE4A1EB00B5023B /* LoginView.swift */; };
 		81118EE92AFEA6C200C870EC /* DetectorNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81118EE82AFEA6C200C870EC /* DetectorNews.swift */; };
 		81118EEB2AFF090A00C870EC /* Loading Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81118EEA2AFF090900C870EC /* Loading Screen.swift */; };
 		8112C6E02B17DECD00A9ECAB /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8112C6DF2B17DECD00A9ECAB /* Camera.swift */; };
@@ -66,7 +67,6 @@
 		81D2C14C2BC8822800543C55 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D2C14B2BC8822800543C55 /* ImagePicker.swift */; };
 		81D2C14E2BCA576200543C55 /* PersonalReports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D2C14D2BCA576200543C55 /* PersonalReports.swift */; };
 		81D2C1502BCB79FC00543C55 /* CheckData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D2C14F2BCB79FC00543C55 /* CheckData.swift */; };
-		81E4078C2BE328900088D88D /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E4078B2BE328900088D88D /* Login.swift */; };
 		81E4078E2BE34CC30088D88D /* OptionsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E4078D2BE34CC30088D88D /* OptionsSheet.swift */; };
 		81F6B67D2B0FDA6300CAEC5E /* TeachScreen1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F6B67C2B0FDA6300CAEC5E /* TeachScreen1.swift */; };
 		81F6B67F2B0FDA6D00CAEC5E /* TeachScreen2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F6B67E2B0FDA6D00CAEC5E /* TeachScreen2.swift */; };
@@ -91,6 +91,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8102BB372BE4A1EB00B5023B /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		81118EE82AFEA6C200C870EC /* DetectorNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectorNews.swift; sourceTree = "<group>"; };
 		81118EEA2AFF090900C870EC /* Loading Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loading Screen.swift"; sourceTree = "<group>"; };
 		8112C6DF2B17DECD00A9ECAB /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
@@ -128,7 +129,6 @@
 		81D2C14D2BCA576200543C55 /* PersonalReports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalReports.swift; sourceTree = "<group>"; };
 		81D2C14F2BCB79FC00543C55 /* CheckData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckData.swift; sourceTree = "<group>"; };
 		81D2C1512BCB7C8F00543C55 /* Hoax-Hunter-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Hoax-Hunter-Info.plist"; sourceTree = SOURCE_ROOT; };
-		81E4078B2BE328900088D88D /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Login.swift; path = "../../auth info/Login.swift"; sourceTree = "<group>"; };
 		81E4078D2BE34CC30088D88D /* OptionsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsSheet.swift; sourceTree = "<group>"; };
 		81F6B67C2B0FDA6300CAEC5E /* TeachScreen1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachScreen1.swift; sourceTree = "<group>"; };
 		81F6B67E2B0FDA6D00CAEC5E /* TeachScreen2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachScreen2.swift; sourceTree = "<group>"; };
@@ -236,7 +236,7 @@
 				811EBA2F2AFC2E1B00F7C5CA /* Preview Content */,
 				811EBA532AFC2EA500F7C5CA /* Launch Screen.storyboard */,
 				81118EE82AFEA6C200C870EC /* DetectorNews.swift */,
-				81E4078B2BE328900088D88D /* Login.swift */,
+				8102BB372BE4A1EB00B5023B /* LoginView.swift */,
 				81687E6D2B05BD8600B8412A /* Name.swift */,
 				81F6B67C2B0FDA6300CAEC5E /* TeachScreen1.swift */,
 				81F6B67E2B0FDA6D00CAEC5E /* TeachScreen2.swift */,
@@ -457,10 +457,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				811928D52BBF717D000DE777 /* GlobalReports.swift in Sources */,
+				8102BB382BE4A1EB00B5023B /* LoginView.swift in Sources */,
 				8160CD6D2BC4AC8B0023EBC6 /* ProfileInfo.swift in Sources */,
 				81E4078E2BE34CC30088D88D /* OptionsSheet.swift in Sources */,
 				8160CD692BC3A9EE0023EBC6 /* Profile.swift in Sources */,
-				81E4078C2BE328900088D88D /* Login.swift in Sources */,
 				8127E8602BCB9316000E6CAE /* Notifications.swift in Sources */,
 				81D2C1482BC768EB00543C55 /* NewsClassifierv2.mlmodel in Sources */,
 				81687E6E2B05BD8700B8412A /* Name.swift in Sources */,
